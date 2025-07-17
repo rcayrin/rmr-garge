@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMR Garage | Premium Motorcycle Customization</title>
+    <style>
+         :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #f1faee;
+            --dark: #0e1726;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        /* Header Styles */
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(14, 23, 38, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(241, 250, 238, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        /* Hero Section */
+        
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            background: linear-gradient(rgba(14, 23, 38, 0.7), rgba(14, 23, 38, 0.9));
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8e6266a2-8509-4fa0-ae72-8c6926b66ecc.png') center/cover no-repeat;
+            z-index: -1;
+            background-attachment: fixed;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--accent);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--light);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--primary);
+            color: var(--accent);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 2rem;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        /* Featured Bikes */
+        
+        .featured {
+            padding: 6rem 5%;
+            background-color: var(--dark);
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .bike-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .bike-card {
+            background: rgba(29, 53, 87, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bike-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .bike-image {
+            height: 250px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bike-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .bike-card:hover .bike-image img {
+            transform: scale(1.05);
+        }
+        
+        .bike-info {
+            padding: 1.5rem;
+        }
+        
+        .bike-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .bike-specs {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .bike-spec {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .bike-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        /* Services Section */
+        
+        .services {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, var(--dark), var(--secondary));
+            text-align: center;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background-color: rgba(241, 250, 238, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            background-color: rgba(230, 57, 70, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        /* About Section */
+        
+        .about {
+            padding: 6rem 5%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5%;
+        }
+        
+        .about-image {
+            flex: 1;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content {
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        .about h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+        
+        .about p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        /* Gallery Section */
+        
+        .gallery {
+            padding: 6rem 5%;
+            background-color: var(--dark);
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        /* Contact Section */
+        
+        .contact {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, var(--secondary), var(--dark));
+            text-align: center;
+        }
+        
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+            text-align: left;
+            background: rgba(241, 250, 238, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .contact-info h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-container {
+            flex: 1;
+            background: rgba(241, 250, 238, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(241, 250, 238, 0.2);
+            border: 1px solid rgba(241, 250, 238, 0.3);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+        /* Footer */
+        
+        footer {
+            background-color: var(--dark);
+            padding: 3rem 5% 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(241, 250, 238, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(241, 250, 238, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(241, 250, 238, 0.5);
+        }
+        /* Responsive Styles */
+        
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+            .about {
+                flex-direction: column;
+            }
+            .about-image {
+                margin-bottom: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem 5%;
+            }
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .bike-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Animations */
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">RMR<span>Garage</span></div>
+            <div class="nav-links"><a href="#home">Home</a><a href="#bikes">Bikes</a><a href="#services">Services</a><a href="#about">About</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a></div>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Ride. Modify. Repeat.</h1>
+            <p>Custom-built motorcycles with cutting-edge performance and unparalleled style. Push the limits with RMR Garage.</p><a href="#bikes" class="cta-button">Explore Bikes</a></div>
+    </section>
+    <!-- Featured Bikes -->
+    <section class="featured" id="bikes">
+        <h2 class="section-title">Our Garage Heroes</h2>
+        <div class="bike-grid">
+            <!-- Bike 1 -->
+            <div class="bike-card">
+                <div class="bike-image"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/db19e3e9-532d-4759-a1fc-dfb613b765e9.png" alt="Custom sport bike with black matte finish and red accents racing on track"></div>
+                <div class="bike-info">
+                    <h3 class="bike-title">RMR Night Fury</h3>
+                    <div class="bike-specs"><span class="bike-spec">1200cc</span><span class="bike-spec">180 HP</span><span class="bike-spec">320 kg</span></div>
+                    <div class="bike-price">$24, 999
+                    </div><a href="#contact" class="cta-button">Custom Order</a></div>
+            </div>
+            <!-- Bike 2 -->
+            <div class="bike-card">
+                <div class="bike-image"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/04d844d5-4949-448c-9c7c-71058c735da1.png" alt="Titanium grey racing motorcycle with carbon fiber details in studio lighting"></div>
+                <div class="bike-info">
+                    <h3 class="bike-title">RMR Titan-X</h3>
+                    <div class="bike-specs"><span class="bike-spec">950cc</span><span class="bike-spec">145 HP</span><span class="bike-spec">280 kg</span></div>
+                    <div class="bike-price">$19, 999
+                    </div><a href="#contact" class="cta-button">Custom Order</a></div>
+            </div>
+            <!-- Bike 3 -->
+            <div class="bike-card">
+                <div class="bike-image"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd8346ee-d2f2-4b0e-8e3d-b80b22dc5345.png" alt="Cafe racer style bike with brown leather seat and brushed metal detailing"></div>
+                <div class="bike-info">
+                    <h3 class="bike-title">RMR Café 750</h3>
+                    <div class="bike-specs"><span class="bike-spec">750cc</span><span class="bike-spec">85 HP</span><span class="bike-spec">210 kg</span></div>
+                    <div class="bike-price">$15, 999
+                    </div><a href="#contact" class="cta-button">Custom Order</a></div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3 class="service-title">Custom Builds</h3>
+                <p>From concept to creation - we build bikes tailored to your exact specifications and riding style.</p>
+            </div>
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3 class="service-title">Performance Tuning</h3>
+                <p>Maximize your bike's potential with our precision engine tuning and dyno testing services.</p>
+            </div>
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3 class="service-title">Custom Paint</h3>
+                <p>Unique, hand-painted designs that make your bike a rolling work of art.</p>
+            </div>
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="service-icon">🔩</div>
+                <h3 class="service-title">Restoration</h3>
+                <p>Bring classic bikes back to life with our meticulous restoration process.</p>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-image"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b72ea255-8443-4b94-afe8-6364ee9dc50e.png" alt="RMR Garage workshop with custom motorcycles in various stages of assembly and skilled mechanics working"></div>
+        <div class="about-content">
+            <h2>About RMR Garage</h2>
+            <p>Founded in 2012 by racing enthusiast Roger M. Reynolds, RMR Garage has grown from a small workshop to one of the most respected custom bike builders in the industry.</p>
+            <p>Our team of engineers, fabricators, and designers live and breathe motorcycles. We combine racing technology with artistic craftsmanship to create bikes that perform as good as they look.</p>
+            <p>Every RMR build starts with a blank canvas and ends with a one-of-a-kind machine that reflects your personality and riding style.</p><a href="#contact" class="cta-button">Visit Our Garage</a></div>
+    </section>
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <!-- Image 1 -->
+            <div class="gallery-item"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7f03007f-989a-4148-8a6d-9b151aa03c54.png" alt="Custom motorbike with neon lighting at night">
+                <div class="gallery-overlay">
+                    <h3>Neon Warrior Build</h3>
+                </div>
+            </div>
+            <!-- Image 2 -->
+            <div class="gallery-item"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1ce60b95-5876-46a7-a582-7417cc69bdf1.png" alt="Detailed close-up of motorcycle engine with chrome parts">
+                <div class="gallery-overlay">
+                    <h3>Performance Engine</h3>
+                </div>
+            </div>
+            <!-- Image 3 -->
+            <div class="gallery-item"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/982137fd-f20e-4783-ab4c-f154339e9604.png" alt="Custom paint job with intricate flame design">
+                <div class="gallery-overlay">
+                    <h3>Hand-Painted Design</h3>
+                </div>
+            </div>
+            <!-- Image 4 -->
+            <div class="gallery-item"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/11a843b2-f44a-4944-b46f-bfd5e28815a7.png" alt="Workshop scene with multiple custom motorcycles under construction">
+                <div class="gallery-overlay">
+                    <h3>Our Workshop</h3>
+                </div>
+            </div>
+            <!-- Image 5 -->
+            <div class="gallery-item"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0cefd981-3dbb-4251-b8af-9a23dfac16fd.png" alt="Custom bike on dyno machine during performance testing">
+                <div class="gallery-overlay">
+                    <h3>Dyno Testing</h3>
+                </div>
+            </div>
+            <!-- Image 6 -->
+            <div class="gallery-item"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/82c85cb3-4ca9-4ffb-a298-098f568bb6d2.png" alt="Finished custom bike displayed at motorcycle show">
+                <div class="gallery-overlay">
+                    <h3>Show Winner</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Details</h3>
+                <div class="contact-detail"><span>📍</span><span>123 Gearshift Lane,
+Motor City,
+MC 12345</span></div>
+                <div class="contact-detail"><span>📞</span><span>(555) 867-5309</span></div>
+                <div class="contact-detail"><span>✉️</span><span>rides@rmrgarage.com</span></div>
+                <div class="contact-detail"><span>🕒</span><span>Mon-Fri: 9am-7pm | Sat: 10am-5pm | Sun: Closed</span></div>
+            </div>
+            <div class="form-container">
+                <h3>Send Us A Message</h3>
+                <form>
+                    <div class="form-group"><label for="name">Name</label><input type="text" id="name" placeholder="Your Name"></div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="Your Email"></div>
+                    <div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="Your Phone"></div>
+                    <div class="form-group"><label for="message">Message</label><textarea id="message" rows="4" placeholder="Your Message"></textarea></div><button type="submit" class="cta-button">Send Message</button></form>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="social-links"><a href="#" class="social-link">FB</a><a href="#" class="social-link">IG</a><a href="#" class="social-link">YT</a><a href="#" class="social-link">TW</a></div>
+        <div class="logo">RMR<span>Garage</span></div>
+        <div class="copyright">© 2023 RMR Garage. All Rights Reserved. </div>
+    </footer>
+</body>
+
+</html>
